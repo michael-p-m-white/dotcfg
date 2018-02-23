@@ -1,0 +1,15 @@
+[user]
+name="Michael White"
+email="michael.p.m.white@gmail.com"
+
+
+[alias]
+st = status
+df = diff
+ds = diff --staged
+dfn = diff --name-only
+lg1 = log --patch-with-stat -n 1
+lg = log --graph --oneline
+co = checkout
+ci = commit
+rh = reset --hard

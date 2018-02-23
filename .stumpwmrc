@@ -1,0 +1,9 @@
+(in-package #:stumpwm-user)
+
+(mode-line)
+
+(let ((xterm-exec-string "exec xterm -fg gray -bg black"))
+  (define-key *root-map* (kbd "c") xterm-exec-string)
+  (define-key *root-map* (kbd "C-c") xterm-exec-string))
+
+(define-key *root-map* (kbd "d") "exec dmenu_run")

@@ -1,0 +1,4 @@
+#-quicklisp
+(let ((quicklisp-file (merge-pathnames ".quicklisp/setup.lisp" (user-homedir-pathname))))
+  (when (probe-file quicklisp-file)
+    (load quicklisp-file)))
