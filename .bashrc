@@ -1,8 +1,11 @@
-if [ -f $HOME/.bash_aliases ]; then
-   source $HOME/.bash_aliases
+if [ -r $HOME/.bash_aliases ]; then
+    source $HOME/.bash_aliases
 fi
 
-# This is probably not the right way to do this
+if [ -r ~/.nix-profile/etc/profile.d/bash_completion.sh ]; then
+    source  ~/.nix-profile/etc/profile.d/bash_completion.sh
+fi
+
 if [ -d ~/.nix-profile/etc/bash_completion.d/ ]; then
     cd ~/.nix-profile/etc/bash_completion.d
     while read line; do
