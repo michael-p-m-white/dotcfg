@@ -1,0 +1,39 @@
+(cl:in-package #:cl-user)
+
+#-quicklisp
+(let ((quicklisp-file (merge-pathnames ".quicklisp/setup.lisp" (user-homedir-pathname))))
+  (when (probe-file quicklisp-file)
+    (load quicklisp-file)))
+
+
+(defpackage #:mike-utility
+  (:use #:cl)
+  (:nicknames #:mu))
+
+(in-package #:mike-utility)
+
+(defmacro -> (symbol &body forms)
+  `(let* (,@(mapcar (lambda (form)
+		     (list symbol form))
+		   forms))
+     ,symbol))
+
+(defun has-hash? (key hash-table)
+  (multiple-value-bind (_ present?)
+      (declare (ignore _))
+    present?))
+
+(defun memo-proc (fn)
+  (let ((hash-table (make-hash-table :test #'equal)))
+    (lambda (arg)
+      (multiple-value-bind (val present?)
+	  (gethash arg hash-table)
+	(if present?
+	    val
+	    (setf (gethash arg hash-table) (funcall fn arg)))))))
+
+(defun slurp (filename &optional (element-type 'character))
+  (with-open-file (s filename :element-type element-type)
+    (let* ((buf (make-array (file-length s) :element-type element-type)))
+      (read-sequence buf s)
+      buf)))
