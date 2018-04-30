@@ -16,3 +16,5 @@ rh = reset --hard
 	editor = emacsclient -c -a ''
 [credential]
 	helper = cache
+[merge]
+	conflictstyle = diff3
