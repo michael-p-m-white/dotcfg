@@ -2,7 +2,6 @@
 name="Michael White"
 email="michael.p.m.white@gmail.com"
 
-
 [alias]
 st = status
 df = diff
