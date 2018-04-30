@@ -12,3 +12,5 @@ lg = log --graph --oneline
 co = checkout
 ci = commit
 rh = reset --hard
+[core]
+	editor = emacsclient -c -a ''
