@@ -26,6 +26,7 @@ in
       graphviz
       guile
       htop
+      jdk
       jq
       #kubernetes
       lilypond
@@ -67,7 +68,6 @@ in
       xev
       ;
 
-    jdk = oraclejdk // {oraclejdk.meta.keep = true;};
 
     openssl = (overrideOutputsToInstall openssl_1_1_0 [ "bin" "dev" "out" "man" ]);
     tmux = (overrideOutputsToInstall tmux [ "out" "man" ]);
