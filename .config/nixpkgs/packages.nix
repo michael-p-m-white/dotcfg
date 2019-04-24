@@ -55,6 +55,10 @@ in
       wireshark
       ;
 
+    inherit (emacs26PackagesNg)
+      structured-haskell-mode
+      ;
+
     inherit (pkgs.gitAndTools)
       gitSVN
       tig
