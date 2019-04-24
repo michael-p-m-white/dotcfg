@@ -12,6 +12,9 @@ in
       bash-completion
       clojure
       dmenu
+      dhall
+      dhall-json
+      dhall-nix
       dos2unix
       emacs
       file
