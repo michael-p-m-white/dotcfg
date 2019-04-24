@@ -72,6 +72,9 @@ in
       xev
       ;
 
+    inherit (elmPackages)
+      elm
+      ;
 
     openssl = (overrideOutputsToInstall openssl_1_1_0 [ "bin" "dev" "out" "man" ]);
     tmux = (overrideOutputsToInstall tmux [ "out" "man" ]);
