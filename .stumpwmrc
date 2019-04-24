@@ -7,3 +7,4 @@
   (define-key *root-map* (kbd "C-c") xterm-exec-string))
 
 (define-key *root-map* (kbd "d") "exec dmenu_run")
+(define-key *root-map* (kbd "e") "exec emacsclient -c -a ''")
