@@ -2,15 +2,13 @@ with builtins;
 let
   overrideOutputsToInstall = pkg: outputs: pkg // { meta = pkg.meta // {outputsToInstall = outputs;};};
 in
-  { pkgs ? 
+  { pkgs ?
       import <nixos> {}
   }:
-  with pkgs;
   {
     inherit (pkgs)
-      ansible
       bash-completion
-      clojure
+      cabal-install
       dmenu
       dhall
       dhall-json
@@ -22,60 +20,61 @@ in
       firefox
       ghc
       gnuplot
-      gradle
       graphviz
       guile
       htop
       jdk
       jq
-      #kubernetes
+      keepass
       lilypond
       lfe
-      maven
       ncdu
       nix-bash-completions
       nix-prefetch-git
-      nix-serve
       nmap
       nodejs
-      #packer
       rlwrap
       sbcl
       sshpass
       sqlite
       sqlitebrowser
       telnet
-      #terraform
-      #terragrunt
-      tightvnc
+      tetex
       tree
+      unzip
       vim
       wget
-      whois
-      wireshark
       ;
 
-    inherit (emacs26PackagesNg)
-      structured-haskell-mode
+    inherit (pkgs.emacsPackages)
+      aggressive-indent
+      lsp-haskell
+      lsp-mode
+      lsp-ui
+      nix-mode
+      shm
+      slime
       ;
+
+    inherit (pkgs.haskellPackages)
+      haskell-language-server
+      ;
+
+    plover = pkgs.plover.dev;
 
     inherit (pkgs.gitAndTools)
       gitSVN
       tig
       ;
 
-    inherit (lispPackages)
+    inherit (pkgs.lispPackages)
       quicklisp
       ;
 
-    inherit (xorg)
+    inherit (pkgs.xorg)
       xev
       ;
 
-    inherit (elmPackages)
-      elm
-      ;
-
-    openssl = (overrideOutputsToInstall openssl_1_1_0 [ "bin" "dev" "out" "man" ]);
-    tmux = (overrideOutputsToInstall tmux [ "out" "man" ]);
+    openssl = (overrideOutputsToInstall (pkgs.openssl) [ "bin" "dev" "out" "man" ]);
+    tmux = (overrideOutputsToInstall pkgs.tmux [ "out" "man" ]);
   }
