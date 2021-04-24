@@ -32,6 +32,7 @@ with builtins;
       nix-prefetch-git
       nmap
       nodejs
+      p7zip
       rlwrap
       sbcl
       sshpass
@@ -40,7 +41,6 @@ with builtins;
       telnet
       tetex
       tree
-      unzip
       vim
       wget
     ;
