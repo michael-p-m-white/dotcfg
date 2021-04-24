@@ -9,7 +9,7 @@ fi
 if [ -d ~/.nix-profile/etc/bash_completion.d/ ]; then
     cd ~/.nix-profile/etc/bash_completion.d
     while read line; do
-	source "$line";
+	source ./"$line";
     done < <(ls)
     cd $OLDPWD
 fi
