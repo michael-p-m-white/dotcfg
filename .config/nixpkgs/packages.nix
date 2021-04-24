@@ -44,7 +44,7 @@ in
       unzip
       vim
       wget
-      ;
+    ;
 
     inherit (pkgs.emacsPackages)
       aggressive-indent
@@ -54,26 +54,26 @@ in
       nix-mode
       shm
       slime
-      ;
+    ;
 
     inherit (pkgs.haskellPackages)
       haskell-language-server
-      ;
+    ;
 
     plover = pkgs.plover.dev;
 
     inherit (pkgs.gitAndTools)
       gitSVN
       tig
-      ;
+    ;
 
     inherit (pkgs.lispPackages)
       quicklisp
-      ;
+    ;
 
     inherit (pkgs.xorg)
       xev
-      ;
+    ;
 
     openssl = (overrideOutputsToInstall (pkgs.openssl) [ "bin" "dev" "out" "man" ]);
     tmux = (overrideOutputsToInstall pkgs.tmux [ "out" "man" ]);
