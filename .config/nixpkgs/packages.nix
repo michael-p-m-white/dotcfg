@@ -1,10 +1,10 @@
 with builtins;
-let
-  overrideOutputsToInstall = pkg: outputs: pkg // { meta = pkg.meta // {outputsToInstall = outputs;};};
-in
   { pkgs ?
       import <nixos> {}
   }:
+  let
+    overrideOutputsToInstall = pkg: outputs: pkgs.lib.addMetaAttrs {outputsToInstall = outputs;} pkg;
+  in
   {
     inherit (pkgs)
       bash-completion
