@@ -14,7 +14,6 @@ in
       dhall-json
       dhall-nix
       dos2unix
-      emacs
       file
       filezilla
       firefox
@@ -46,14 +45,19 @@ in
       wget
     ;
 
-    inherit (pkgs.emacsPackages)
-      aggressive-indent
-      lsp-haskell
-      lsp-mode
-      lsp-ui
-      nix-mode
-      shm
-      slime
+    emacs = pkgs.emacsWithPackages
+      (epkgs: with epkgs;
+        [
+          aggressive-indent
+          intero
+          lsp-haskell
+          lsp-mode
+          lsp-ui
+          nix-mode
+          shm
+          slime
+        ]
+      )
     ;
 
     inherit (pkgs.haskellPackages)
