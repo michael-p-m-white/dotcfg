@@ -13,8 +13,19 @@ co = checkout
 ci = commit
 rh = reset --hard
 [core]
-	editor = emacsclient -c -a ''
-[credential]
-	helper = cache
+        editor = emacsclient -c -a ''
+        pager = delta
+#[credential]
+#helper = cache
 [merge]
-	conflictstyle = diff3
+        conflictstyle = diff3
+
+[interactive]
+        diffFilter = delta --color-only
+[delta]
+        navigate = true
+        syntax-theme = Dracula
+[merge]
+        conflictstyle = diff3
+[diff]
+        colorMoved = default
