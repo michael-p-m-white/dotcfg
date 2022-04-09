@@ -2,3 +2,5 @@ xterm.vt100.eightBitInput: false
 xterm.vt100.renderFont: true
 xterm.vt100.faceName: mono
 xterm.vt100.faceSize: 12
+xterm*background: black
+xterm*foreground: gray
