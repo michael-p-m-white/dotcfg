@@ -1,0 +1,224 @@
+* UI
+** Colors
+#+BEGIN_SRC emacs-lisp
+  ;;Colors
+  (set-background-color "black")
+  (set-foreground-color "white")
+
+  ;; Ensure emacsclient/new frames use the same colors as above
+  (setq default-frame-alist `((background-color . "black")
+                              (foreground-color . "white")))
+#+END_SRC
+** Menu bars
+#+BEGIN_SRC emacs-lisp
+  (menu-bar-mode -1)
+  (tool-bar-mode -1)
+#+END_SRC
+** Shorten "yes-or-no" prompts
+#+BEGIN_SRC emacs-lisp
+  (fset 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+** Navigation
+*** ace-jump
+Allows specific characters to be jumped to directly, across windows/frames,
+with a very small number of keypresses.
+#+BEGIN_SRC emacs-lisp
+  (require 'ace-jump-mode)
+  (global-set-key (kbd "M-o") 'ace-jump-mode)
+  (setq ace-jump-mode-move-keys (cl-loop for c from ?a to ?z collect c))
+#+END_SRC
+*** windmove
+Allows windows to be moved between with Shift+arrow keys
+#+BEGIN_SRC emacs-lisp
+  (when (fboundp 'windmove-default-keybindings)
+    (windmove-default-keybindings))
+#+END_SRC
+* Loading extra libraries
+#+BEGIN_SRC emacs-lisp
+  (require 'cl)
+  (defun add-load-directory (directory)
+    (let ((default-directory directory))
+      (add-to-list 'load-path default-directory)
+      (setq normal-top-level-add-subdirs-inode-list nil)
+      (normal-top-level-add-subdirs-to-load-path)
+      (setq load-path (remove-duplicates load-path :test 'string=))))
+#+END_SRC
+** Add "lisp" directory in emacs directory
+#+BEGIN_SRC emacs-lisp
+  ;; Add everything under .emacs.d/lisp
+  (add-load-directory (concat user-emacs-directory "lisp"))
+  ;; (require 'package)
+  ;; (add-to-list 'package-directory-list "~/.nix-profile/share/emacs/site-lisp/elpa")
+  ;; (package-initialize)
+#+END_SRC
+** Add Erlang-specific emacs files
+Erlang includes its own emacs mode. Include that from the installed directory.
+#+BEGIN_SRC emacs-lisp
+  (add-load-directory (expand-file-name "~/.nix-profile/lib/erlang/lib/tools-3.5.2/emacs/"))
+#+END_SRC
+* Change backup directory
+Centralize backup files, rather than leading files with a trailing "~" all over the place.
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'backup-directory-alist `("." . "~/.emacs.d/backups/"))
+#+END_SRC
+* Cross cutting concerns
+** Highlight region
+#+BEGIN_SRC emacs-lisp
+  ;; Cross cutting concerns
+
+  ;;Highlight region when selecting a region
+  (transient-mark-mode 1)
+#+END_SRC
+** Electric pair mode
+#+BEGIN_SRC emacs-lisp
+  (electric-pair-mode 1)
+#+END_SRC
+** Visual bell
+#+BEGIN_SRC emacs-lisp
+  ;;Turn off the error bell
+  (setq visible-bell t)
+#+END_SRC
+** Disabled commands
+#+BEGIN_SRC emacs-lisp
+  ;;Commands disabled by default that we wish to enable
+  (put 'upcase-region 'disabled nil)
+  (put 'narrow-to-region 'disabled nil)
+#+END_SRC
+** Ido mode
+#+BEGIN_SRC emacs-lisp
+  (ido-mode 1)
+  (ido-everywhere 1)
+#+END_SRC
+
+When trying to open a file, if Ido cannot find it in the current directory,
+it will search other recently used directories to try to find a matching file.
+This can be quite annoying when trying to create a new file.
+The following setting disables this functionality.
+#+BEGIN_SRC emacs-lisp
+  (setq ido-auto-merge-work-directories-length -1)
+#+END_SRC
+
+** Parenthesis matching
+#+BEGIN_SRC emacs-lisp
+  (show-paren-mode 1) ;;Highlight pairs of matching parens
+  (setq show-paren-delay 0) ;;Highlight immediately
+  (setq show-paren-style 'mixed) ;;Highlight parens if both visible, otherwise highlight expression
+#+END_SRC
+** Aggressive indent
+#+BEGIN_SRC emacs-lisp
+
+  ;; Aggressive indent mode, to keep non-whitespace sensitive languages always indented correctly.
+  (require 'aggressive-indent)
+#+END_SRC
+** Lilypond
+#+BEGIN_SRC emacs-lisp
+  (require 'lilypond-mode)
+  (add-to-list 'auto-mode-alist `("\\.ly\\'" . LilyPond-mode))
+#+END_SRC
+** Magit
+#+BEGIN_SRC emacs-lisp
+  ;; Magit
+  (require 'magit)
+  (require 'magit-delta)
+#+END_SRC
+*** Hooks
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'magit-mode-hook (lambda () (magit-delta-mode 1)))
+#+END_SRC
+* Custom set variables
+Ensure custom set variables are stored somewhere other than init.el.
+#+BEGIN_SRC emacs-lisp
+  (setq custom-file (expand-file-name "~/.emacs.d/custom.el"))
+  (load custom-file)
+#+END_SRC
+* Programming languages
+** Language Server Protocol
+Multiple languages have Language Server Protocol (LSP) plugins.
+Ensure that these are available for subsequent languages
+#+BEGIN_SRC emacs-lisp
+  (require 'lsp)
+  (require 'lsp-ui)
+#+END_SRC
+** Nix
+#+BEGIN_SRC emacs-lisp
+  (require 'nix-mode)
+#+END_SRC
+** YAML
+#+BEGIN_SRC emacs-lisp
+  (require 'yaml-mode)
+#+END_SRC
+** Coq
+#+BEGIN_SRC emacs-lisp
+  (require 'coq-mode)
+  (require 'company-coq)
+#+END_SRC
+*** Hooks
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'coq-mode-hook 'company-coq-mode)
+#+END_SRC
+** Lisp
+*** Paredit
+Paredit is a (more or less) structural mode for editing Lisp files.
+#+BEGIN_SRC emacs-lisp
+    (require 'paredit)
+#+END_SRC
+*** Common Lisp
+#+BEGIN_SRC emacs-lisp
+  ;; Common Lisp
+  (require 'slime)
+  (slime-setup '(slime-fancy))
+  (slime-require 'swank-listener-hooks)
+  (setq slime-lisp-implementations
+        '((sbcl ("sbcl" "--dynamic-space-size" "4096");; :coding-system utf-8-unix
+                )))
+  (setq inferior-lisp-program "sbcl")
+
+#+END_SRC
+*** Elisp
+#+BEGIN_SRC emacs-lisp
+  ;; Print full results of elisp expressions
+  (setq eval-expression-print-length nil)
+  (setq eval-expression-print-level nil)
+#+END_SRC
+*** Hooks
+#+BEGIN_SRC emacs-lisp
+  (let ((lisp-hooks '(emacs-lisp-mode-hook
+                      lisp-mode-hook
+                      scheme-mode-hook
+                      lisp-interaction-mode-hook
+                      clojure-mode-hook)))
+    (mapcar (lambda (hook)
+              (add-hook hook 'paredit-mode)
+              (add-hook hook 'aggressive-indent-mode))
+            lisp-hooks))
+#+END_SRC
+** Haskell
+#+BEGIN_SRC emacs-lisp
+  (require 'lsp-haskell)
+  ;; Structured Haskell Mode
+  (require 'shm)
+#+END_SRC
+*** Hooks
+#+BEGIN_SRC emacs-lisp
+  (mapcar (lambda (hook)
+            (add-hook 'haskell-mode-hook hook))
+          '(interactive-haskell-mode
+            lsp
+            lsp-ui-mode
+            structured-haskell-mode))
+#+END_SRC
+** Elm
+#+BEGIN_SRC emacs-lisp
+  ;; Elm
+  (require 'elm-mode)
+#+END_SRC
+*** Hooks
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'elm-mode-hook 'elm-format-on-save-mode)
+  (add-hook 'elm-mode-hook 'paredit-mode)
+#+END_SRC
+** Scala
+#+BEGIN_SRC emacs-lisp
+  (require 'scala-mode)
+  (require 'lsp-metals)
+#+END_SRC
