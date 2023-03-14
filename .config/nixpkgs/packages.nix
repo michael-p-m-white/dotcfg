@@ -100,6 +100,7 @@ with builtins;
           paredit
           prolog-mode
           proof-general
+          rust-mode
           scala-mode
           shm
           slime
