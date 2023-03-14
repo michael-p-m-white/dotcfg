@@ -90,6 +90,7 @@ with builtins;
           elm-mode
           lfe-mode
           lsp-haskell
+          lsp-metals
           lsp-mode
           lsp-ui
           magit
