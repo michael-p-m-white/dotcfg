@@ -6,8 +6,8 @@
   (set-foreground-color "white")
 
   ;; Ensure emacsclient/new frames use the same colors as above
-  (setq default-frame-alist `((background-color . "black")
-                              (foreground-color . "white")))
+  (customize-set-variable 'default-frame-alist `((background-color . "black")
+                                                (foreground-color . "white")))
 #+END_SRC
 ** Menu bars
 #+BEGIN_SRC emacs-lisp
@@ -76,7 +76,7 @@ Centralize backup files, rather than leading files with a trailing "~" all over 
 ** Visual bell
 #+BEGIN_SRC emacs-lisp
   ;;Turn off the error bell
-  (setq visible-bell t)
+  (customize-set-variable 'visible-bell t)
 #+END_SRC
 ** Disabled commands
 #+BEGIN_SRC emacs-lisp
@@ -95,14 +95,14 @@ it will search other recently used directories to try to find a matching file.
 This can be quite annoying when trying to create a new file.
 The following setting disables this functionality.
 #+BEGIN_SRC emacs-lisp
-  (setq ido-auto-merge-work-directories-length -1)
+  (customize-set-variable 'ido-auto-merge-work-directories-length -1)
 #+END_SRC
 
 ** Parenthesis matching
 #+BEGIN_SRC emacs-lisp
   (show-paren-mode 1) ;;Highlight pairs of matching parens
-  (setq show-paren-delay 0) ;;Highlight immediately
-  (setq show-paren-style 'mixed) ;;Highlight parens if both visible, otherwise highlight expression
+  (customize-set-variable 'show-paren-delay 0) ;;Highlight immediately
+  (customize-set-variable 'show-paren-style 'mixed) ;;Highlight parens if both visible, otherwise highlight expression
 #+END_SRC
 ** Aggressive indent
 #+BEGIN_SRC emacs-lisp
@@ -128,7 +128,7 @@ The following setting disables this functionality.
 * Custom set variables
 Ensure custom set variables are stored somewhere other than init.el.
 #+BEGIN_SRC emacs-lisp
-  (setq custom-file (expand-file-name "~/.emacs.d/custom.el"))
+  (customize-set-variable 'custom-file (expand-file-name "~/.emacs.d/custom.el"))
   (load custom-file)
 #+END_SRC
 * Programming languages
@@ -177,8 +177,8 @@ Paredit is a (more or less) structural mode for editing Lisp files.
 *** Elisp
 #+BEGIN_SRC emacs-lisp
   ;; Print full results of elisp expressions
-  (setq eval-expression-print-length nil)
-  (setq eval-expression-print-level nil)
+  (customize-set-variable 'eval-expression-print-length nil)
+  (customize-set-variable 'eval-expression-print-level nil)
 #+END_SRC
 *** Hooks
 #+BEGIN_SRC emacs-lisp
