@@ -2,9 +2,14 @@ if [ -r $HOME/.bash_aliases ]; then
     source $HOME/.bash_aliases
 fi
 
-if [ -r ~/.nix-profile/etc/profile.d/bash_completion.sh ]; then
-    source  ~/.nix-profile/etc/profile.d/bash_completion.sh
-fi
+source_if_readable() {
+    local source_file="${1}"
+    if [ -r "${source_file}" ]; then
+        source "${source_file}"
+    fi
+}
+
+source_if_readable ~/.nix-profile/etc/profile.d/bash_completion.sh
 
 if [ -d ~/.nix-profile/etc/bash_completion.d/ ]; then
     cd ~/.nix-profile/etc/bash_completion.d
