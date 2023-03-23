@@ -25,6 +25,7 @@ with builtins;
       file
       filezilla
       firefox
+      fzf
       ghc
       gnuplot
       graphviz

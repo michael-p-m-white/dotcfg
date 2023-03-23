@@ -10,6 +10,8 @@ source_if_readable() {
 }
 
 source_if_readable ~/.nix-profile/etc/profile.d/bash_completion.sh
+source_if_readable ~/.nix-profile/share/fzf/completion.bash
+source_if_readable ~/.nix-profile/share/fzf/key-bindings.bash
 
 if [ -d ~/.nix-profile/etc/bash_completion.d/ ]; then
     cd ~/.nix-profile/etc/bash_completion.d
