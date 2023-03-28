@@ -9,6 +9,13 @@
   (customize-set-variable 'default-frame-alist `((background-color . "black")
                                                 (foreground-color . "white")))
 #+END_SRC
+** Default window size
+Ensure that new frames start maximized.
+#+BEGIN_SRC emacs-lisp
+  (customize-set-variable 'default-frame-alist
+                          (append default-frame-alist
+                                  `((fullscreen . maximized))))
+#+END_SRC
 ** Menu bars
 #+BEGIN_SRC emacs-lisp
   (menu-bar-mode -1)
