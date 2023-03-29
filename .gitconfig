@@ -25,6 +25,7 @@ rh = reset --hard
 [delta]
         navigate = true
         syntax-theme = Dracula
+        side-by-side = true
 [merge]
         conflictstyle = diff3
 [diff]
