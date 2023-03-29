@@ -94,6 +94,7 @@ in
           company-coq
           dhall-mode
           elm-mode
+          haskell-mode
           lfe-mode
           lsp-haskell
           lsp-metals
@@ -110,6 +111,7 @@ in
           scala-mode
           shm
           slime
+          structured-haskell-mode
           yaml-mode
         ]
       )
