@@ -1,6 +1,11 @@
 with builtins;
+let
+  flakeRef = github:NixOS/nixpkgs/285b3ff0660640575186a4086e1f8dc0df2874b5;
+  flake = builtins.getFlake flakeRef;
+  defaultPackages = flake.legacyPackages."${builtins.currentSystem}";
+in
   { pkgs ?
-      import <nixos> {}
+    defaultPackages
   }:
   let
     overrideOutputsToInstall = pkg: outputs: pkgs.lib.addMetaAttrs {outputsToInstall = outputs;} pkg;
