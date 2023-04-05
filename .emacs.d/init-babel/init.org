@@ -229,3 +229,10 @@ Paredit is a (more or less) structural mode for editing Lisp files.
   (require 'scala-mode)
   (require 'lsp-metals)
 #+END_SRC
+** KMonad kdb config
+A mode for editing the *.kbd files used by KMonad.
+Note that, unlike the rest of my modes, this is not installed by Nix.
+#+BEGIN_SRC emacs-lisp
+  (require 'kbd-mode)
+  (add-hook 'kbd-mode-hook (lambda () (aggressive-indent-mode -1)))
+#+END_SRC
