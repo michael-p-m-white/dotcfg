@@ -54,6 +54,7 @@ in
       nix-prefetch-git
       nmap
       nodejs
+      ntfs3g
       p7zip
       rlwrap
       sbcl
