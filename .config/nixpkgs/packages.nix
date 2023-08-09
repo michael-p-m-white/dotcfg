@@ -1,6 +1,6 @@
 with builtins;
 let
-  flakeRef = github:NixOS/nixpkgs/285b3ff0660640575186a4086e1f8dc0df2874b5;
+  flakeRef = github:NixOS/nixpkgs/2039c98a8afec8ff3273a3ac34b9e3864174ed94;
   flake = builtins.getFlake flakeRef;
   defaultPackages = flake.legacyPackages."${builtins.currentSystem}";
 in
