@@ -48,6 +48,7 @@ in
       lfe
       libreoffice
       lilypond
+      mpv
       ncdu
       nix-bash-completions
       nix-prefetch-git
