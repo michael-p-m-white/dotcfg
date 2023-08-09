@@ -29,6 +29,7 @@ in
       dhall-nix
       dos2unix
       eaglemode
+      erlang
       fasm
       ffmpeg
       file
