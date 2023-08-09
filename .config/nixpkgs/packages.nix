@@ -12,6 +12,7 @@ in
   in
   rec {
     inherit (pkgs)
+      agda
       alacritty
       alloy6
       ammonite
