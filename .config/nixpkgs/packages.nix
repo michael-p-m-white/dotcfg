@@ -78,6 +78,12 @@ in
       wget
     ;
 
+
+    # Games. Keeping separate, just because.
+    inherit (pkgs)
+      mindustry
+    ;
+
   jdk = pkgs.openjdk11;
   sbt = pkgs.sbt.override { jre = jdk.jre or jdk; };
 
