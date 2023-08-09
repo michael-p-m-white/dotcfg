@@ -56,6 +56,7 @@ in
       nodejs
       ntfs3g
       p7zip
+      pass
       rlwrap
       sbcl
       scala
