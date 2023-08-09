@@ -57,6 +57,7 @@ in
       ntfs3g
       p7zip
       pass
+      ripgrep
       rlwrap
       sbcl
       scala
