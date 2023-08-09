@@ -14,6 +14,7 @@ in
     inherit (pkgs)
       alacritty
       ammonite
+      audacity
       bash-completion
       broot
       cabal-install
