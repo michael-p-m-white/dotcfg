@@ -29,6 +29,7 @@ in
       dhall-nix
       dos2unix
       eaglemode
+      fasm
       ffmpeg
       file
       filezilla
