@@ -37,6 +37,7 @@ in
       firefox
       fzf
       ghc
+      gimp
       gnuplot
       graphviz
       guile
