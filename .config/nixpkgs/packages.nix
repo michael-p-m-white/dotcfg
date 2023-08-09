@@ -13,6 +13,7 @@ in
   rec {
     inherit (pkgs)
       alacritty
+      alloy6
       ammonite
       asunder
       audacity
