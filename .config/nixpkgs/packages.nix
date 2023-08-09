@@ -55,6 +55,7 @@ in
       nmap
       nodejs
       ntfs3g
+      obs-studio
       p7zip
       pass
       ripgrep
