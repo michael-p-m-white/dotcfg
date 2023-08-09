@@ -86,13 +86,13 @@ in
     discord =
       let
         inherit (pkgs) fetchurl;
-        version = "0.0.17";
+        version = "0.0.22";
       in
         pkgs.discord.override {
           inherit version;
           src = fetchurl {
             url = "https://dl.discordapp.net/apps/linux/${version}/discord-${version}.tar.gz";
-            sha256 = "058k0cmbm4y572jqw83bayb2zzl2fw2aaz0zj1gvg6sxblp76qil";
+            sha256 = "sha256-F1xzdx4Em6Ref7HTe9EH7whx49iFc0DFpaQKdFquq6c=";
           };
         };
   
