@@ -58,6 +58,7 @@ in
       obs-studio
       p7zip
       pass
+      psensor
       ripgrep
       rlwrap
       sbcl
