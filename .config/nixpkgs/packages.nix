@@ -17,6 +17,7 @@ in
       asunder
       audacity
       bash-completion
+      blender
       broot
       cabal-install
       chromium
