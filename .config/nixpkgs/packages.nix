@@ -14,6 +14,7 @@ in
     inherit (pkgs)
       alacritty
       ammonite
+      asunder
       audacity
       bash-completion
       broot
