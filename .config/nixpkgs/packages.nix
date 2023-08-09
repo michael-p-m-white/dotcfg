@@ -36,6 +36,7 @@ in
       filezilla
       firefox
       fzf
+      gforth
       ghc
       gimp
       gnuplot
