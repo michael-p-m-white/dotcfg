@@ -90,6 +90,7 @@ Centralize backup files, rather than leading files with a trailing "~" all over 
   ;;Commands disabled by default that we wish to enable
   (put 'upcase-region 'disabled nil)
   (put 'narrow-to-region 'disabled nil)
+  (put 'set-goal-column 'disabled nil)
 #+END_SRC
 ** Ido mode
 #+BEGIN_SRC emacs-lisp
