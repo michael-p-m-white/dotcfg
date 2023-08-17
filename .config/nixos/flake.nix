@@ -1,6 +1,11 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/2039c98a8afec8ff3273a3ac34b9e3864174ed94";
+    nixpkgs = {
+      type = "github";
+      owner = "NixOS";
+      repo = "nixpkgs";
+      ref = "nixos-23.05";
+    };
   };
 
   outputs = { self, nixpkgs }: {
