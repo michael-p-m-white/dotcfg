@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports =
@@ -206,6 +206,10 @@
     '';
     #sandboxPaths = with pkgs; [ bash.outPath ];
   };
+
+  # Ensure the "nixpkgs" flake alias refers to the nixpkgs flake used
+  # to build the system.
+  nix.registry.nixpkgs.flake = inputs.nixpkgs;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
