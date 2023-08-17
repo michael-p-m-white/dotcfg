@@ -1,0 +1,155 @@
+diff --git a/src/Data/Aeson/Encoding/Builder.hs b/src/Data/Aeson/Encoding/Builder.hs
+index e0fce85..cfde3d7 100644
+--- a/src/Data/Aeson/Encoding/Builder.hs
++++ b/src/Data/Aeson/Encoding/Builder.hs
+@@ -42,7 +42,7 @@ import Prelude.Compat
+ 
+ import Data.Aeson.Internal.Time
+ import Data.Aeson.Types.Internal (Value (..))
+-import Data.ByteString.Builder as B
++import Data.ByteString.Builder as B hiding (scientific)
+ import Data.ByteString.Builder.Prim as BP
+ import Data.ByteString.Builder.Scientific (scientificBuilder)
+ import Data.Char (chr, ord)
+diff --git a/src/Data/Aeson/TH.hs b/src/Data/Aeson/TH.hs
+index 3fb3044..2a341ec 100644
+--- a/src/Data/Aeson/TH.hs
++++ b/src/Data/Aeson/TH.hs
+@@ -150,7 +150,7 @@ import qualified Data.Foldable as F (all)
+ import qualified Data.HashMap.Strict as H (difference, fromList, keys, lookup, toList)
+ import qualified Data.List.NonEmpty as NE (length, reverse)
+ import qualified Data.Map as M (fromList, keys, lookup , singleton, size)
+-import qualified Data.Semigroup as Semigroup (Option(..))
++import qualified Data.Semigroup as Semigroup
+ import qualified Data.Set as Set (empty, insert, member)
+ import qualified Data.Text as T (Text, pack, unpack)
+ import qualified Data.Vector as V (unsafeIndex, null, length, create, empty)
+@@ -474,9 +474,7 @@ argsToValue target jc tvMap opts multiCons
+ 
+             restFields = mconcatE (map pureToPair rest)
+ 
+-            (maybes0, rest0) = partition isMaybe argCons
+-            (options, rest) = partition isOption rest0
+-            maybes = maybes0 ++ map optionToMaybe options
++            (maybes, rest) = partition isMaybe argCons
+ 
+             maybeToPair = toPairLifted True
+             pureToPair = toPairLifted False
+@@ -518,13 +516,6 @@ isMaybe :: (a, Type, b) -> Bool
+ isMaybe (_, AppT (ConT t) _, _) = t == ''Maybe
+ isMaybe _                       = False
+ 
+-isOption :: (a, Type, b) -> Bool
+-isOption (_, AppT (ConT t) _, _) = t == ''Semigroup.Option
+-isOption _                       = False
+-
+-optionToMaybe :: (ExpQ, b, c) -> (ExpQ, b, c)
+-optionToMaybe (a, b, c) = ([|Semigroup.getOption|] `appE` a, b, c)
+-
+ (<^>) :: ExpQ -> ExpQ -> ExpQ
+ (<^>) a b = infixApp a [|(E.><)|] b
+ infixr 6 <^>
+@@ -1130,11 +1121,6 @@ instance OVERLAPPABLE_ LookupField a where
+ instance INCOHERENT_ LookupField (Maybe a) where
+     lookupField pj _ _ = parseOptionalFieldWith pj
+ 
+-instance INCOHERENT_ LookupField (Semigroup.Option a) where
+-    lookupField pj tName rec obj key =
+-        fmap Semigroup.Option
+-             (lookupField (fmap Semigroup.getOption . pj) tName rec obj key)
+-
+ lookupFieldWith :: (Value -> Parser a) -> String -> String
+                 -> Object -> T.Text -> Parser a
+ lookupFieldWith pj tName rec obj key =
+diff --git a/src/Data/Aeson/Types/FromJSON.hs b/src/Data/Aeson/Types/FromJSON.hs
+index cd39ac3..4c682b1 100644
+--- a/src/Data/Aeson/Types/FromJSON.hs
++++ b/src/Data/Aeson/Types/FromJSON.hs
+@@ -1324,14 +1324,6 @@ instance INCOHERENT_ (Selector s, FromJSON a) =>
+         label = fieldLabelModifier opts sname
+         sname = selName (undefined :: M1 _i s _f _p)
+ 
+--- Parse an Option like a Maybe.
+-instance INCOHERENT_ (Selector s, FromJSON a) =>
+-         RecordFromJSON' arity (S1 s (K1 i (Semigroup.Option a))) where
+-    recordParseJSON' p obj = wrap <$> recordParseJSON' p obj
+-      where
+-        wrap :: S1 s (K1 i (Maybe a)) p -> S1 s (K1 i (Semigroup.Option a)) p
+-        wrap (M1 (K1 a)) = M1 (K1 (Semigroup.Option a))
+-
+ --------------------------------------------------------------------------------
+ 
+ productParseJSON0
+@@ -2257,14 +2249,6 @@ instance (FromJSON a) => FromJSON (Semigroup.WrappedMonoid a) where
+     {-# INLINE parseJSONList #-}
+ 
+ 
+-instance FromJSON1 Semigroup.Option where
+-    liftParseJSON p p' = fmap Semigroup.Option . liftParseJSON p p'
+-    {-# INLINE liftParseJSON #-}
+-
+-instance FromJSON a => FromJSON (Semigroup.Option a) where
+-    parseJSON = parseJSON1
+-    {-# INLINE parseJSON #-}
+-
+ -------------------------------------------------------------------------------
+ -- data-fix
+ -------------------------------------------------------------------------------
+diff --git a/src/Data/Aeson/Types/ToJSON.hs b/src/Data/Aeson/Types/ToJSON.hs
+index 5908e70..d62eac3 100644
+--- a/src/Data/Aeson/Types/ToJSON.hs
++++ b/src/Data/Aeson/Types/ToJSON.hs
+@@ -1102,19 +1102,6 @@ instance INCOHERENT_
+     recordToPairs opts targs m1 = fieldToPair opts targs m1
+     {-# INLINE recordToPairs #-}
+ 
+-instance INCOHERENT_
+-    ( Selector s
+-    , GToJSON' enc arity (K1 i (Maybe a))
+-    , KeyValuePair enc pairs
+-    , Monoid pairs
+-    ) => RecordToPairs enc pairs arity (S1 s (K1 i (Semigroup.Option a)))
+-  where
+-    recordToPairs opts targs = recordToPairs opts targs . unwrap
+-      where
+-        unwrap :: S1 s (K1 i (Semigroup.Option a)) p -> S1 s (K1 i (Maybe a)) p
+-        unwrap (M1 (K1 (Semigroup.Option a))) = M1 (K1 a)
+-    {-# INLINE recordToPairs #-}
+-
+ fieldToPair :: (Selector s
+                , GToJSON' enc arity a
+                , KeyValuePair enc pairs)
+@@ -2272,20 +2259,6 @@ instance ToJSON a => ToJSON (Semigroup.WrappedMonoid a) where
+     {-# INLINE toEncoding #-}
+ 
+ 
+-instance ToJSON1 Semigroup.Option where
+-    liftToJSON t to' = liftToJSON t to' . Semigroup.getOption
+-    {-# INLINE liftToJSON #-}
+-
+-    liftToEncoding t to' = liftToEncoding t to' . Semigroup.getOption
+-    {-# INLINE liftToEncoding #-}
+-
+-instance ToJSON a => ToJSON (Semigroup.Option a) where
+-    toJSON = toJSON1
+-    {-# INLINE toJSON #-}
+-
+-    toEncoding = toEncoding1
+-    {-# INLINE toEncoding #-}
+-
+ -------------------------------------------------------------------------------
+ -- data-fix
+ -------------------------------------------------------------------------------
+diff --git a/tests/SerializationFormatSpec.hs b/tests/SerializationFormatSpec.hs
+index 575efd0..036885e 100644
+--- a/tests/SerializationFormatSpec.hs
++++ b/tests/SerializationFormatSpec.hs
+@@ -212,8 +212,6 @@ jsonExamples =
+   , example "Semigroup.First Int" "2" (pure 2 :: Semigroup.First Int)
+   , example "Semigroup.Last Int" "2" (pure 2 :: Semigroup.Last Int)
+   , example "Semigroup.WrappedMonoid Int" "2" (Semigroup.WrapMonoid 2 :: Semigroup.WrappedMonoid Int)
+-  , example "Semigroup.Option Just" "2" (pure 2 :: Semigroup.Option Int)
+-  , example "Semigroup.Option Nothing" "null" (Semigroup.Option (Nothing :: Maybe Bool))
+ 
+   -- time 1.9
+   , example "SystemTime" "123.123456789" (MkSystemTime 123 123456789)

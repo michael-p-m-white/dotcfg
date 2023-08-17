@@ -1,6 +1,6 @@
 with builtins;
 let
-  flakeRef = github:NixOS/nixpkgs/2039c98a8afec8ff3273a3ac34b9e3864174ed94;
+  flakeRef = "nixpkgs"; # Pinned by system configuration
   flake = builtins.getFlake flakeRef;
   defaultPackages = flake.legacyPackages."${builtins.currentSystem}";
 in
@@ -46,6 +46,7 @@ in
       guile
       hanazono
       htop
+      inetutils
       jq
       keepass
       lfe
@@ -69,8 +70,9 @@ in
       slack
       sshpass
       sqlitebrowser
-      swiProlog
-      telnet
+      # Prolog is failing to evaluate for nixos-23.05 as it depends on openssl-1.1.1u, which is marked as insecure.
+      # Commenting out so I can update without dealing with it late at night.
+      # swiProlog
       tetex
       tree
       vim
@@ -130,7 +132,6 @@ in
           proof-general
           rust-mode
           scala-mode
-          shm
           slime
           structured-haskell-mode
           yaml-mode

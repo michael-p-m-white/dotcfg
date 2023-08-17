@@ -61,7 +61,7 @@ Allows windows to be moved between with Shift+arrow keys
 ** Add Erlang-specific emacs files
 Erlang includes its own emacs mode. Include that from the installed directory.
 #+BEGIN_SRC emacs-lisp
-  (add-load-directory (expand-file-name "~/.nix-profile/lib/erlang/lib/tools-3.5.2/emacs/"))
+  (add-load-directory (expand-file-name "~/.nix-profile/lib/erlang/lib/tools-3.5.3/emacs/"))
 #+END_SRC
 * Change backup directory
 Centralize backup files, rather than leading files with a trailing "~" all over the place.
