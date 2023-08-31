@@ -116,6 +116,7 @@ in
         [
           ace-jump-mode
           aggressive-indent
+          ascii-art-to-unicode
           company-coq
           dhall-mode
           elm-mode
