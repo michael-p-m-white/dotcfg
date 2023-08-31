@@ -129,6 +129,7 @@ in
           magit-delta
           multiple-cursors
           nix-mode
+          org-roam
           paredit
           prolog-mode
           proof-general
