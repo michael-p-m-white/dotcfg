@@ -41,6 +41,7 @@ in
       gforth
       ghc
       gimp
+      gnumake
       gnuplot
       graphviz
       guile
