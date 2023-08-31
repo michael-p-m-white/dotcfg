@@ -64,6 +64,7 @@ in
       p7zip
       pass
       psensor
+      qgis
       ripgrep
       rlwrap
       sbcl
