@@ -20,6 +20,10 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Use 80x50 resolution on boot menu.
+  # This was previously handled by the "hidpi"
+  boot.loader.systemd-boot.consoleMode = "1";
+
   boot.kernelParams = [
     "i915.enable_psr=0"
   ];
