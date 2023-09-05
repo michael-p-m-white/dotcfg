@@ -120,6 +120,8 @@ in
           company-coq
           dhall-mode
           elm-mode
+          geiser
+          geiser-guile
           haskell-mode
           lfe-mode
           lsp-haskell
