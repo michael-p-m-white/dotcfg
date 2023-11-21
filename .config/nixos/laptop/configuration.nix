@@ -222,6 +222,9 @@
   # Ensure the "nixpkgs" flake alias refers to the nixpkgs flake used
   # to build the system.
   nix.registry.nixpkgs.flake = inputs.nixpkgs;
+  nix.nixPath = [
+    "nixpkgs=${inputs.nixpkgs.outPath}"
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
