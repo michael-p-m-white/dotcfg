@@ -75,13 +75,22 @@ in
       # Prolog is failing to evaluate for nixos-23.05 as it depends on openssl-1.1.1u, which is marked as insecure.
       # Commenting out so I can update without dealing with it late at night.
       # swiProlog
-      tetex
       tree
       vim
       vlc
       wget
     ;
 
+    texlive = let texlive = pkgs.texlive;
+              in
+                texlive.combine {
+                  inherit (texlive)
+                    changepage
+                    scheme-basic
+                    metafont
+                    sectsty
+                  ;
+                };
 
     # Games. Keeping separate, just because.
     inherit (pkgs)
