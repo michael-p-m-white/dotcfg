@@ -11,6 +11,8 @@
         co = checkout
         ci = commit
         rh = reset --hard
+        lga = log --graph --oneline --all
+        dfp = diff --patch-with-stat
 [core]
         editor = emacsclient -c -a ''
         pager = delta
