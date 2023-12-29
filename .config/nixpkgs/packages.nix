@@ -149,6 +149,7 @@ in
           scala-mode
           slime
           structured-haskell-mode
+          vterm
           yaml-mode
         ]
       )
