@@ -98,6 +98,7 @@
     #   };
     # };
     displayManager = {
+      sddm.enable = true;
       defaultSession = "plasma";
       lightdm.extraConfig = "logind-check-graphical=true";
     };
