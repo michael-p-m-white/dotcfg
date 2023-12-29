@@ -1,0 +1,30 @@
+diff --git a/src/Descriptive/JSON.hs b/src/Descriptive/JSON.hs
+index 783c32c..43724bc 100644
+--- a/src/Descriptive/JSON.hs
++++ b/src/Descriptive/JSON.hs
+@@ -38,6 +38,7 @@ import           Data.Function
+ import           Data.Aeson hiding (Value(Object,Null,Array),object)
+ import           Data.Aeson.Types (Value,parseMaybe)
+ import qualified Data.Aeson.Types as Aeson
++import qualified Data.Aeson.Key as AesonKey
+ import           Data.Bifunctor
+ import           Data.Data
+ import           Data.Monoid
+@@ -104,7 +105,7 @@ key k =
+                           (liftM (Wrap doc) d))
+        (\_ p ->
+           do s <- get
+-             case parseMaybe (const (s .: k))
++             case parseMaybe (const (s .: (AesonKey.fromText k)))
+                              () of
+                Nothing ->
+                  return (Continued (Unit doc))
+@@ -130,7 +131,7 @@ keyMaybe k =
+                           (liftM (Wrap doc) d))
+        (\_ p ->
+           do s <- get
+-             case parseMaybe (const (s .: k))
++             case parseMaybe (const (s .: (AesonKey.fromText k)))
+                              () of
+                Nothing ->
+                  return (Succeeded Nothing)

@@ -120,39 +120,44 @@ in
           };
         };
   
-    emacs = pkgs.emacsWithPackages
-      (epkgs: with epkgs;
-        [
-          ace-jump-mode
-          aggressive-indent
-          ascii-art-to-unicode
-          company-coq
-          dhall-mode
-          elm-mode
-          geiser
-          geiser-guile
-          haskell-mode
-          lfe-mode
-          lsp-haskell
-          lsp-metals
-          lsp-mode
-          lsp-ui
-          magit
-          magit-delta
-          multiple-cursors
-          nix-mode
-          org-roam
-          paredit
-          prolog-mode
-          proof-general
-          rust-mode
-          scala-mode
-          slime
-          structured-haskell-mode
-          vterm
-          yaml-mode
-        ]
-      )
+    emacs =
+      let
+        emacs29Packages = pkgs.emacsPackagesFor (pkgs.emacs29);
+        emacsWithPackages = emacs29Packages.withPackages;
+      in
+        emacsWithPackages
+          (epkgs: with epkgs;
+            [
+              ace-jump-mode
+              aggressive-indent
+              ascii-art-to-unicode
+              company-coq
+              dhall-mode
+              elm-mode
+              geiser
+              geiser-guile
+              haskell-mode
+              lfe-mode
+              lsp-haskell
+              lsp-metals
+              lsp-mode
+              lsp-ui
+              magit
+              magit-delta
+              multiple-cursors
+              nix-mode
+              org-roam
+              paredit
+              prolog-mode
+              proof-general
+              rust-mode
+              scala-mode
+              slime
+              structured-haskell-mode
+              vterm
+              yaml-mode
+            ]
+          )
     ;
 
     inherit (pkgs.jetbrains)
