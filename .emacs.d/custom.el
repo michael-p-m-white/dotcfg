@@ -9,7 +9,8 @@
  '(magit-delta-default-dark-theme "Dracula")
  '(magit-diff-refine-hunk 'all)
  '(package-directory-list
-   (add-to-list 'package-directory-list "~/.nix-profile/share/emacs/site-lisp/elpa")))
+   (add-to-list 'package-directory-list "~/.nix-profile/share/emacs/site-lisp/elpa"))
+ '(transient-default-level 7))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
