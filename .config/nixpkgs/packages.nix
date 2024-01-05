@@ -32,6 +32,7 @@ in
       dos2unix
       eaglemode
       erlang
+      evtest
       fasm
       ffmpeg
       file
