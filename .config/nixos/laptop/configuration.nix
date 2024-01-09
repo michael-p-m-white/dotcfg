@@ -157,9 +157,17 @@
   #   firefox
   # ];
 
+  # By default, ibus handles input events asynchronously. This creates the potential for input events at approximately
+  # the same time to be handled in the wrong order -- for example, when the stenography application Plover emits input
+  # events after the keys of a chord are lifted, or when rolling home row modifier keys on a QMK-powered keyboard. In
+  # order to ensure that input events are handled in order, we set IBUS_ENABLE_SYNC_MODE to 1 to force synchronous
+  # handling of input events by ibus.
   i18n.inputMethod = {
     enabled = "ibus";
     ibus.engines = with pkgs.ibus-engines; [ anthy ];
+  };
+  environment.variables = {
+    IBUS_ENABLE_SYNC_MODE = "1";
   };
     
 
