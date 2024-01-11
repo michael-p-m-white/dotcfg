@@ -205,6 +205,23 @@
   # services.xserver.displayManager.defaultSession = "plasma5";
 
 
+  # The Ducky keyboard I use on my desktop has multiple "nodes" on the same USB device.
+  # The default udev rules only create a symlink for one of those nodes, which means every time I start
+  # my windows VM I have to update references to the keyboard devices which don't get automatic by-id symlinks.
+  # This udev rule ensures that all the nodes on that device get persistent symlinks.
+  # The general approach comes from here: https://unix.stackexchange.com/questions/86728/udev-rule-to-match-multiple-node-usb-device
+  services.udev.extraRules = ''
+    # Rules for my Ducky keyboard, to ensure that all its event devices get distinct symlinks
+    ACTION=="remove", GOTO="keyboard_end"
+
+    SUBSYSTEMS=="usb", ENV{.LOCAL-bInterfaceNum}="$attr{bInterfaceNumber}"
+    ATTRS{phys}=="?*", ATTRS{id/bustype}=="0003", ATTRS{id/product}=="4252", ATTRS{id/vendor}=="04d9", ENV{.LOCAL-devname}="$attr{name}"
+    ENV{.LOCAL-devname}!="", SYMLINK+="input/by-id/usb_keyboard_$env{.LOCAL-bInterfaceNum}_$env{.LOCAL-devname}"
+
+    LABEL="keyboard_end"
+  '';
+
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   # users.extraUsers.guest = {
   #   isNormalUser = true;
