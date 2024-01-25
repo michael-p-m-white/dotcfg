@@ -129,6 +129,22 @@ The following setting disables this functionality.
   (require 'magit)
   (require 'magit-delta)
 #+END_SRC
+*** Default arguments
+#+BEGIN_SRC emacs-lisp
+  (defun add-magit-existing-default-arguments (symbol property &rest new-defaults)
+    (let ((existing-defaults (get symbol property)))
+      (put symbol
+           property
+           (cl-remove-duplicates (append new-defaults existing-defaults) :test 'equal))))
+#+END_SRC
+**** Logging
+Git/magit can color log graphs, but does not do so by default. I find that a colored graph helps me see the structure
+better, so I want the "--color" option to be set by default.
+#+BEGIN_SRC emacs-lisp
+  (add-magit-existing-default-arguments
+   'magit-log-mode 'magit-log-default-arguments
+   "--color")
+#+END_SRC
 *** Hooks
 #+BEGIN_SRC emacs-lisp
   (add-hook 'magit-mode-hook (lambda () (magit-delta-mode 1)))
