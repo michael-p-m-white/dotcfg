@@ -105,7 +105,9 @@ in
     elm
     elm-analyse
     elm-format
+    elm-language-server
     elm-live
+    elm-test
     ;
   
     discord =
