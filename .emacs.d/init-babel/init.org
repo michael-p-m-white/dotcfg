@@ -236,10 +236,23 @@ Paredit is a (more or less) structural mode for editing Lisp files.
   ;; Elm
   (require 'elm-mode)
 #+END_SRC
+*** LSP
+Initialize LSP related variables for Elm
+#+BEGIN_SRC emacs-lisp
+  (let ((bin-directory "~/.nix-profile/bin/"))
+    (loop for (lsp-var bin) in
+          '((lsp-elm-elm-format-path          "elm-format")
+            (lsp-elm-elm-language-server-path "elm-language-server")
+            (lsp-elm-elm-path                 "elm")
+            (lsp-elm-elm-test-path            "elm-test"))
+          do
+          (customize-set-variable lsp-var (concat bin-directory bin))))
+#+END_SRC
 *** Hooks
 #+BEGIN_SRC emacs-lisp
   (add-hook 'elm-mode-hook 'elm-format-on-save-mode)
   (add-hook 'elm-mode-hook 'paredit-mode)
+  (add-hook 'elm-mode-hook 'lsp-mode)
 #+END_SRC
 ** Scala
 #+BEGIN_SRC emacs-lisp
