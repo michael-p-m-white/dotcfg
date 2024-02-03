@@ -1,0 +1,97 @@
+diff --git a/make2/build_jconsole.sh b/make2/build_jconsole.sh
+index e648eb2c..660be2e9 100755
+--- a/make2/build_jconsole.sh
++++ b/make2/build_jconsole.sh
+@@ -81,7 +81,8 @@ common="$OPENMP -fPIC -O2 -fvisibility=hidden -fno-strict-aliasing  \
+  -Wno-type-limits \
+  -Wno-uninitialized \
+  -Wno-unused-parameter \
+- -Wno-unused-value "
++ -Wno-unused-value \
++ -Wno-deprecated-non-prototype "
+ 
+ else
+ # clang
+@@ -107,8 +108,8 @@ common="$OPENMP -fPIC -O2 -fvisibility=hidden -fno-strict-aliasing \
+  -Wno-unused-function \
+  -Wno-unused-parameter \
+  -Wno-unused-value \
+- -Wno-unused-variable "
+-
++ -Wno-unused-variable \
++ -Wno-deprecated-non-prototype "
+ fi
+ 
+ TARGET=jconsole
+diff --git a/make2/build_jnative.sh b/make2/build_jnative.sh
+index 5909f911..f585a149 100755
+--- a/make2/build_jnative.sh
++++ b/make2/build_jnative.sh
+@@ -80,7 +80,8 @@ common="$OPENMP -fPIC -O2 -fvisibility=hidden -fno-strict-aliasing  \
+  -Wno-type-limits \
+  -Wno-uninitialized \
+  -Wno-unused-parameter \
+- -Wno-unused-value "
++ -Wno-unused-value \
++ -Wno-deprecated-non-prototype "
+ 
+ else
+ # clang
+@@ -106,7 +107,8 @@ common="$OPENMP -fPIC -O2 -fvisibility=hidden -fno-strict-aliasing \
+  -Wno-unused-function \
+  -Wno-unused-parameter \
+  -Wno-unused-value \
+- -Wno-unused-variable "
++ -Wno-unused-variable \
++ -Wno-deprecated-non-prototype "
+ 
+ fi
+ 
+diff --git a/make2/build_libj.sh b/make2/build_libj.sh
+index 2125b7d9..a08d2d9f 100755
+--- a/make2/build_libj.sh
++++ b/make2/build_libj.sh
+@@ -114,7 +114,8 @@ common="$OPENMP -fPIC -O2 -fvisibility=hidden -fno-strict-aliasing -fno-stack-pr
+  -Wno-type-limits \
+  -Wno-uninitialized \
+  -Wno-unused-parameter \
+- -Wno-unused-value "
++ -Wno-unused-value \
++ -Wno-deprecated-non-prototype "
+ 
+ else
+ # clang
+@@ -144,7 +145,8 @@ common="$OPENMP -fPIC -O2 -fvisibility=hidden -fno-strict-aliasing  \
+  -Wno-unused-function \
+  -Wno-unused-parameter \
+  -Wno-unused-value \
+- -Wno-unused-variable "
++ -Wno-unused-variable \
++ -Wno-deprecated-non-prototype "
+ 
+ fi
+ 
+diff --git a/make2/build_tsdll.sh b/make2/build_tsdll.sh
+index 6ba16556..3a58cfa1 100755
+--- a/make2/build_tsdll.sh
++++ b/make2/build_tsdll.sh
+@@ -80,7 +80,8 @@ common="$OPENMP -fPIC -O2 -fvisibility=hidden -fno-strict-aliasing  \
+  -Wno-type-limits \
+  -Wno-uninitialized \
+  -Wno-unused-parameter \
+- -Wno-unused-value "
++ -Wno-unused-value \
++ -Wno-deprecated-non-prototype "
+ 
+ else
+ # clang
+@@ -106,7 +107,8 @@ common="$OPENMP -fPIC -O2 -fvisibility=hidden -fno-strict-aliasing \
+  -Wno-unused-function \
+  -Wno-unused-parameter \
+  -Wno-unused-value \
+- -Wno-unused-variable "
++ -Wno-unused-variable \
++ -Wno-deprecated-non-prototype "
+ 
+ fi
+ 
