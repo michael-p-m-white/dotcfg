@@ -1,0 +1,10 @@
+import = [
+"~/.nix-profile/share/alacritty-theme/xterm.toml",
+#"~/.nix-profile/share/alacritty-theme/argonaut.toml",
+#"~/.nix-profile/share/alacritty-theme/tokyo-night.toml",
+#"~/.nix-profile/share/alacritty-theme/doom_one.toml",
+#"~/.nix-profile/share/alacritty-theme/onedark.toml",
+]
+
+[font]
+size = 12.0

@@ -14,6 +14,7 @@ in
     inherit (pkgs)
       agda
       alacritty
+      alacritty-theme
       alloy6
       ammonite
       asunder
