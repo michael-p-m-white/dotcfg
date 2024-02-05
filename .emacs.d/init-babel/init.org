@@ -163,14 +163,6 @@ Ensure that these are available for subsequent languages
   (require 'lsp)
   (require 'lsp-ui)
 #+END_SRC
-** Nix
-#+BEGIN_SRC emacs-lisp
-  (require 'nix-mode)
-#+END_SRC
-** YAML
-#+BEGIN_SRC emacs-lisp
-  (require 'yaml-mode)
-#+END_SRC
 ** Coq
 #+BEGIN_SRC emacs-lisp
   (require 'coq-mode)
@@ -179,6 +171,44 @@ Ensure that these are available for subsequent languages
 *** Hooks
 #+BEGIN_SRC emacs-lisp
   (add-hook 'coq-mode-hook 'company-coq-mode)
+#+END_SRC
+** Elm
+#+BEGIN_SRC emacs-lisp
+  ;; Elm
+  (require 'elm-mode)
+#+END_SRC
+*** LSP
+Initialize LSP related variables for Elm
+#+BEGIN_SRC emacs-lisp
+  (let ((bin-directory "~/.nix-profile/bin/"))
+    (loop for (lsp-var bin) in
+          '((lsp-elm-elm-format-path          "elm-format")
+            (lsp-elm-elm-language-server-path "elm-language-server")
+            (lsp-elm-elm-path                 "elm")
+            (lsp-elm-elm-test-path            "elm-test"))
+          do
+          (customize-set-variable lsp-var (concat bin-directory bin))))
+#+END_SRC
+*** Hooks
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'elm-mode-hook 'elm-format-on-save-mode)
+  (add-hook 'elm-mode-hook 'paredit-mode)
+  (add-hook 'elm-mode-hook 'lsp-mode)
+#+END_SRC
+** Haskell
+#+BEGIN_SRC emacs-lisp
+  (require 'lsp-haskell)
+  ;; Structured Haskell Mode
+  (require 'shm)
+#+END_SRC
+*** Hooks
+#+BEGIN_SRC emacs-lisp
+  (mapcar (lambda (hook)
+            (add-hook 'haskell-mode-hook hook))
+          '(interactive-haskell-mode
+            lsp
+            lsp-ui-mode
+            structured-haskell-mode))
 #+END_SRC
 ** Lisp
 *** Paredit
@@ -216,48 +246,18 @@ Paredit is a (more or less) structural mode for editing Lisp files.
               (add-hook hook 'aggressive-indent-mode))
             lisp-hooks))
 #+END_SRC
-** Haskell
+** Nix
 #+BEGIN_SRC emacs-lisp
-  (require 'lsp-haskell)
-  ;; Structured Haskell Mode
-  (require 'shm)
-#+END_SRC
-*** Hooks
-#+BEGIN_SRC emacs-lisp
-  (mapcar (lambda (hook)
-            (add-hook 'haskell-mode-hook hook))
-          '(interactive-haskell-mode
-            lsp
-            lsp-ui-mode
-            structured-haskell-mode))
-#+END_SRC
-** Elm
-#+BEGIN_SRC emacs-lisp
-  ;; Elm
-  (require 'elm-mode)
-#+END_SRC
-*** LSP
-Initialize LSP related variables for Elm
-#+BEGIN_SRC emacs-lisp
-  (let ((bin-directory "~/.nix-profile/bin/"))
-    (loop for (lsp-var bin) in
-          '((lsp-elm-elm-format-path          "elm-format")
-            (lsp-elm-elm-language-server-path "elm-language-server")
-            (lsp-elm-elm-path                 "elm")
-            (lsp-elm-elm-test-path            "elm-test"))
-          do
-          (customize-set-variable lsp-var (concat bin-directory bin))))
-#+END_SRC
-*** Hooks
-#+BEGIN_SRC emacs-lisp
-  (add-hook 'elm-mode-hook 'elm-format-on-save-mode)
-  (add-hook 'elm-mode-hook 'paredit-mode)
-  (add-hook 'elm-mode-hook 'lsp-mode)
+  (require 'nix-mode)
 #+END_SRC
 ** Scala
 #+BEGIN_SRC emacs-lisp
   (require 'scala-mode)
   (require 'lsp-metals)
+#+END_SRC
+** YAML
+#+BEGIN_SRC emacs-lisp
+  (require 'yaml-mode)
 #+END_SRC
 ** KMonad kdb config
 A mode for editing the *.kbd files used by KMonad.
