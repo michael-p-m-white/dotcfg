@@ -1,0 +1,2 @@
+# Jujutsu creates .jj directories, which we do not want git to manage.
+.jj

@@ -1,0 +1,10 @@
+[user]
+name  = "Michael White"
+email = "michael.p.m.white@gmail.com"
+
+[ui]
+#pager  = [ "delta" ]
+editor = [ "emacsclient", "-c", "-a", '""' ]
+
+[aliases]
+df = [ "diff" ]

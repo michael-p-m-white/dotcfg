@@ -50,6 +50,7 @@ in
       hanazono
       htop
       inetutils
+      jujutsu
       jq
       keepass
       lfe
