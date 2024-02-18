@@ -13,7 +13,7 @@ xterm.vt100.color2: #49cc49
 ! Yellow
 xterm.vt100.color3: #cccc49
 ! blue
-xterm.vt100.color4: #4949cc
+xterm.vt100.color4: #5c5cff
 ! Magenta
 xterm.vt100.color5: #cc49cc
 ! Cyan
@@ -29,7 +29,7 @@ xterm.vt100.color10: #5cff5c
 ! Light yellow
 xterm.vt100.color11: #ffff5c
 ! Light blue
-xterm.vt100.color12: #5c5cff
+xterm.vt100.color12: #7d7dff
 ! Light magenta
 xterm.vt100.color13: #ff5cff
 ! Light cyan
