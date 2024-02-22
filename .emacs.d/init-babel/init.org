@@ -267,3 +267,19 @@ better, so I want the "--color" option to be set by default.
 #+BEGIN_SRC emacs-lisp
   (add-hook 'magit-mode-hook (lambda () (magit-delta-mode 1)))
 #+END_SRC
+** Org
+*** Customize headline ellipses
+When a headline is folded and contains additional content, org-mode
+defaults to showing ellipses (three individual dots). org-mode also
+has a custom face it applies to ellipses, but /only/ when the
+~org-ellipsis~ variable is empty. This custom face includes an
+underline by default, which I can't say I think looks great, so we
+remove that. The default face is also identical to the default second
+level heading, so we use a different color as well.
+#+BEGIN_SRC emacs-lisp
+  (customize-set-variable 'org-ellipsis " ⤵")
+  (set-face-attribute 'org-ellipsis nil
+                      :foreground "plum"
+                      :underline nil
+                      )
+#+END_SRC
