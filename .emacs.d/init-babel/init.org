@@ -7,7 +7,7 @@
 
   ;; Ensure emacsclient/new frames use the same colors as above
   (customize-set-variable 'default-frame-alist `((background-color . "black")
-                                                (foreground-color . "white")))
+                                                 (foreground-color . "white")))
 #+END_SRC
 ** Default window size
 Ensure that new frames start maximized.
