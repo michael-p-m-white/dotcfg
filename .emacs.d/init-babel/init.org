@@ -283,3 +283,18 @@ level heading, so we use a different color as well.
                       :underline nil
                       )
 #+END_SRC
+** VTerm
+#+BEGIN_SRC emacs-lisp
+  (require 'vterm)
+#+END_SRC
+*** Colors
+#+BEGIN_SRC emacs-lisp
+  (set-face-attribute 'vterm-color-black nil :foreground "#252525")
+  (set-face-attribute 'vterm-color-red nil :foreground "#cc4949")
+  (set-face-attribute 'vterm-color-green nil :foreground "#49cc49")
+  (set-face-attribute 'vterm-color-yellow nil :foreground "#cccc49")
+  (set-face-attribute 'vterm-color-blue nil :foreground "#5c5cff")
+  (set-face-attribute 'vterm-color-magenta nil :foreground "#cc49cc")
+  (set-face-attribute 'vterm-color-cyan nil :foreground "#49cccc")
+  (set-face-attribute 'vterm-color-white nil :foreground "#e5e5e5")
+#+END_SRC
