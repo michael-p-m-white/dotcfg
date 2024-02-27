@@ -112,6 +112,11 @@ The following setting disables this functionality.
   (customize-set-variable 'show-paren-delay 0) ;;Highlight immediately
   (customize-set-variable 'show-paren-style 'mixed) ;;Highlight parens if both visible, otherwise highlight expression
 #+END_SRC
+** Indentation
+Use spaces, not tabs, for indentation.
+#+BEGIN_SRC emacs-lisp
+  (customize-set-variable 'indent-tabs-mode nil)
+#+END_SRC
 ** Aggressive indent
 #+BEGIN_SRC emacs-lisp
 
@@ -245,7 +250,21 @@ Note that, unlike the rest of my modes, this is not installed by Nix.
 #+BEGIN_SRC emacs-lisp
   ;; Magit
   (require 'magit)
-  (require 'magit-delta)
+#+END_SRC
+*** Default menu level
+Magit uses a menuing system called "transient" (which was originally just part
+of magit) to allow for interaction with git with single-letter hotkeys. This
+system allows for commands to live at different "levels", so that advanced
+commands can be hidden by default. I want to see all commands, so I set the
+default level to show to 7, which is the maximum.
+#+BEGIN_SRC emacs-lisp
+  (customize-set-variable 'transient-default-level 7)
+#+END_SRC
+
+*** Diffs
+Highlight word-level changes within diffs, always.
+#+BEGIN_SRC emacs-lisp
+  (customize-set-variable 'magit-diff-refine-hunk 'all)
 #+END_SRC
 *** Default arguments
 #+BEGIN_SRC emacs-lisp
@@ -262,6 +281,17 @@ better, so I want the "--color" option to be set by default.
   (add-magit-existing-default-arguments
    'magit-log-mode 'magit-log-default-arguments
    "--color")
+#+END_SRC
+*** Magit-delta
+Delta is a custom pager for git which provides side-by-side diffs, syntax-aware
+highlighting, and more. It also provides some features within magit.
+#+BEGIN_SRC emacs-lisp
+  (require 'magit-delta)
+#+END_SRC
+**** Theme
+Use the Dracula dark theme.
+#+BEGIN_SRC emacs-lisp
+  (customize-set-variable 'magit-delta-default-dark-theme "Dracula")
 #+END_SRC
 *** Hooks
 #+BEGIN_SRC emacs-lisp
