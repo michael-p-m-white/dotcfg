@@ -4,4 +4,5 @@
   (import ./.overlays/elm.nix)
   (import ./.overlays/j.nix)
   (import ./.overlays/alacritty.nix)
+  (import ./.overlays/jujutsu.nix)
 ]
