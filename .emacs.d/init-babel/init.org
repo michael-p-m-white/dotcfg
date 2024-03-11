@@ -26,13 +26,27 @@ Ensure that new frames start maximized.
   (fset 'yes-or-no-p 'y-or-n-p)
 #+END_SRC
 ** Navigation
-*** ace-jump
+*** avy
 Allows specific characters to be jumped to directly, across windows/frames,
-with a very small number of keypresses.
+with a very small number of keypresses. Avy effectively supersedes ace-jump-mode.
 #+BEGIN_SRC emacs-lisp
-  (require 'ace-jump-mode)
-  (global-set-key (kbd "M-o") 'ace-jump-mode)
-  (setq ace-jump-mode-move-keys (cl-loop for c from ?a to ?z collect c))
+  (require 'avy)
+  (customize-set-variable 'avy-timeout-seconds 0.25)
+
+  (require 'transient)
+  (transient-define-prefix avy-transient ()
+    "Transient menu for avy commands"
+    ["Avy command"
+     ("c" "avy-goto-char" avy-goto-char)
+     ("l" "avy-goto-line" avy-goto-line)
+     ("r" "avy-resume" avy-resume)
+     ("s" "avy-isearch" avy-isearch)
+     ("t" "avy-goto-char-timer" avy-goto-char-timer)
+     ("w" "avy-goto-subword-1" avy-goto-subword-1)
+     ]
+    )
+
+  (global-set-key (kbd "M-o") #'avy-transient)
 #+END_SRC
 *** windmove
 Allows windows to be moved between with Shift+arrow keys

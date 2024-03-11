@@ -133,9 +133,9 @@ in
         emacsWithPackages
           (epkgs: with epkgs;
             [
-              ace-jump-mode
               aggressive-indent
               ascii-art-to-unicode
+              avy
               company-coq
               dhall-mode
               elm-mode
