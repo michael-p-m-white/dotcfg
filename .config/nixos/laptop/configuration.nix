@@ -98,19 +98,25 @@
     #   };
     # };
     displayManager = {
-      sddm.enable = true;
-      defaultSession = "plasma";
       lightdm.extraConfig = "logind-check-graphical=true";
     };
   };
 
+  services.displayManager = {
+    sddm.enable = true;
+    defaultSession = "plasma";
+  };
+
+  services.xserver.videoDrivers = [
+    "modesetting"
+  ];
   # services.tlp.enable = true;
 
   # Enable Bluetooth
   hardware.bluetooth.enable = true;
 
   # Configure keymap in X11
-  services.xserver.layout = "us";
+  services.xserver.xkb.layout = "us";
   # services.xserver.xkbOptions = "eurosign:e";
 
   # Enable CUPS to print documents.
@@ -211,7 +217,6 @@
   # networking.firewall.enable = false;
 
   nix = {
-    package = pkgs.nixUnstable;
     daemonCPUSchedPolicy = "idle";
     # autoOptimiseStore = true;
     # buildCores = 6;

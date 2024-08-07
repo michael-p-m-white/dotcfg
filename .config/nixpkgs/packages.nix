@@ -158,7 +158,7 @@ in
               rust-mode
               scala-mode
               slime
-              structured-haskell-mode
+              #structured-haskell-mode
               vterm
               yaml-mode
             ]

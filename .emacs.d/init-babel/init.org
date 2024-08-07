@@ -187,7 +187,7 @@ Initialize LSP related variables for Elm
 #+BEGIN_SRC emacs-lisp
   (require 'lsp-haskell)
   ;; Structured Haskell Mode
-  (require 'shm)
+  ;;(require 'shm)
 #+END_SRC
 *** Hooks
 #+BEGIN_SRC emacs-lisp
