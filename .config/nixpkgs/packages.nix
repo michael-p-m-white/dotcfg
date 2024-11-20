@@ -81,6 +81,7 @@ in
       tree
       vim
       vlc
+      wezterm
       wget
     ;
 
