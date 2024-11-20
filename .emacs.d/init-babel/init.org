@@ -234,6 +234,10 @@ Paredit is a (more or less) structural mode for editing Lisp files.
               (add-hook hook 'aggressive-indent-mode))
             lisp-hooks))
 #+END_SRC
+** Lua
+#+BEGIN_SRC emacs-lisp
+  (require 'lua-mode)
+#+END_SRC
 ** Nix
 #+BEGIN_SRC emacs-lisp
   (require 'nix-mode)
