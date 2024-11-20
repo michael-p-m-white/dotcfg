@@ -147,6 +147,7 @@ in
               lsp-metals
               lsp-mode
               lsp-ui
+              lua-mode
               magit
               magit-delta
               multiple-cursors
