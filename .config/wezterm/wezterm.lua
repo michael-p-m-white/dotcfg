@@ -2,6 +2,10 @@ local wezterm = require 'wezterm'
 
 local config = wezterm.config_builder()
 
+-- Font rendering broke after updating to nixos 24.11.
+-- Setting the frontend to "WebGpu" fixed the issue.
+-- See here for details: https://github.com/wez/wezterm/issues/5990
+config.front_end = "WebGpu"
 config.colors = {
 
    -- Custom colors, taken from ~/.Xdefaults

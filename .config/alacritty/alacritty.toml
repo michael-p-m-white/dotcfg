@@ -1,5 +1,5 @@
-import = [
 "~/.nix-profile/share/alacritty-theme/xterm.toml",
+general.import = [
 #"~/.nix-profile/share/alacritty-theme/argonaut.toml",
 #"~/.nix-profile/share/alacritty-theme/tokyo-night.toml",
 #"~/.nix-profile/share/alacritty-theme/doom_one.toml",

@@ -169,7 +169,8 @@
   # order to ensure that input events are handled in order, we set IBUS_ENABLE_SYNC_MODE to 1 to force synchronous
   # handling of input events by ibus.
   i18n.inputMethod = {
-    enabled = "ibus";
+    type = "ibus";
+    enable = true;
     ibus.engines = with pkgs.ibus-engines; [ anthy ];
   };
   environment.variables = {
@@ -191,12 +192,20 @@
     "steam-original"
     "steam-runtime"
     "steam-run"
+    "steam-unwrapped"
   ];
-  programs.steam.enable = true;
+  programs.steam = {
+    enable = true;
+    package = pkgs.steam.override {
+      extraLibraries = p: with p; [
+        nss
+      ];
+    };
+  };
   programs.adb.enable = true;
 
   # Add fuse as an extra module for steam (for use by steam-run, to get Beyond All Reason running)
-  hardware.opengl.extraPackages = with pkgs; [
+  hardware.graphics.extraPackages = with pkgs; [
     fuse
   ];
 
