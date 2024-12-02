@@ -9,6 +9,7 @@ config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
 -- Setting the frontend to "WebGpu" fixed the issue.
 -- See here for details: https://github.com/wez/wezterm/issues/5990
 config.front_end = "WebGpu"
+config.font = wezterm.font 'DejaVu Sans Mono'
 config.colors = {
 
    -- Custom colors, taken from ~/.Xdefaults
