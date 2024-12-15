@@ -2,6 +2,9 @@ local wezterm = require 'wezterm'
 
 local config = wezterm.config_builder()
 
+-- Disable font ligatures
+config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
+
 -- Font rendering broke after updating to nixos 24.11.
 -- Setting the frontend to "WebGpu" fixed the issue.
 -- See here for details: https://github.com/wez/wezterm/issues/5990
