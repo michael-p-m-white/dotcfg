@@ -46,6 +46,8 @@ with a very small number of keypresses. Avy effectively supersedes ace-jump-mode
      ]
     )
 
+  (customize-set-variable 'transient-show-popup nil)
+
   (global-set-key (kbd "M-o") #'avy-transient)
 #+END_SRC
 *** windmove
