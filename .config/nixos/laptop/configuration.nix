@@ -82,8 +82,6 @@
       # lxqt = {
       #   enable = true;
       # };
-      plasma5 = {
-        enable = true;
       };
       # xfce = {
       #   enable = true;
@@ -101,6 +99,7 @@
       lightdm.extraConfig = "logind-check-graphical=true";
     };
   };
+  services.desktopManager.plasma6.enable = true;
 
   services.displayManager = {
     sddm.enable = true;
