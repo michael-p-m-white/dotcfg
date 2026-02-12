@@ -26,6 +26,7 @@
 
   boot.kernelParams = [
     "i915.enable_psr=0"
+    "mem_sleep_default=deep"
   ];
 
   networking.hostName = "nixos"; # Define your hostname.
