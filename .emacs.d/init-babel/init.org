@@ -1,3 +1,26 @@
+* Loading extra libraries
+#+BEGIN_SRC emacs-lisp
+  (require 'cl)
+  (defun add-load-directory (directory)
+    (let ((default-directory directory))
+      (add-to-list 'load-path default-directory)
+      (setq normal-top-level-add-subdirs-inode-list nil)
+      (normal-top-level-add-subdirs-to-load-path)
+      (setq load-path (remove-duplicates load-path :test 'string=))))
+#+END_SRC
+** Add "lisp" directory in emacs directory
+#+BEGIN_SRC emacs-lisp
+  ;; Add everything under .emacs.d/lisp
+  (add-load-directory (concat user-emacs-directory "lisp"))
+  ;; (require 'package)
+  ;; (add-to-list 'package-directory-list "~/.nix-profile/share/emacs/site-lisp/elpa")
+  ;; (package-initialize)
+#+END_SRC
+** Add Erlang-specific emacs files
+Erlang includes its own emacs mode. Include that from the installed directory.
+#+BEGIN_SRC emacs-lisp
+  (add-load-directory (expand-file-name "~/.nix-profile/lib/erlang/lib/tools-4.1.3/emacs/"))
+#+END_SRC
 * UI
 ** Colors
 #+BEGIN_SRC emacs-lisp
@@ -55,29 +78,6 @@ Allows windows to be moved between with Shift+arrow keys
 #+BEGIN_SRC emacs-lisp
   (when (fboundp 'windmove-default-keybindings)
     (windmove-default-keybindings))
-#+END_SRC
-* Loading extra libraries
-#+BEGIN_SRC emacs-lisp
-  (require 'cl)
-  (defun add-load-directory (directory)
-    (let ((default-directory directory))
-      (add-to-list 'load-path default-directory)
-      (setq normal-top-level-add-subdirs-inode-list nil)
-      (normal-top-level-add-subdirs-to-load-path)
-      (setq load-path (remove-duplicates load-path :test 'string=))))
-#+END_SRC
-** Add "lisp" directory in emacs directory
-#+BEGIN_SRC emacs-lisp
-  ;; Add everything under .emacs.d/lisp
-  (add-load-directory (concat user-emacs-directory "lisp"))
-  ;; (require 'package)
-  ;; (add-to-list 'package-directory-list "~/.nix-profile/share/emacs/site-lisp/elpa")
-  ;; (package-initialize)
-#+END_SRC
-** Add Erlang-specific emacs files
-Erlang includes its own emacs mode. Include that from the installed directory.
-#+BEGIN_SRC emacs-lisp
-  (add-load-directory (expand-file-name "~/.nix-profile/lib/erlang/lib/tools-4.1.3/emacs/"))
 #+END_SRC
 * Change backup directory
 Centralize backup files, rather than leading files with a trailing "~" all over the place.
