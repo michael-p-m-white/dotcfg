@@ -120,7 +120,9 @@
   # services.xserver.xkbOptions = "eurosign:e";
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  # Disable CUPS due to RCE CVEs.
+  services.printing.enable = false;
+  services.printing.cups-pdf.enable = false;
 
   # Enable sound.
   # sound.enable = true;
