@@ -204,12 +204,6 @@
   };
   programs.adb.enable = true;
 
-  # Add fuse as an extra module for steam (for use by steam-run, to get Beyond All Reason running)
-  hardware.graphics.extraPackages = with pkgs; [
-    fuse
-  ];
-
-  
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
