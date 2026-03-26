@@ -158,6 +158,7 @@
                       "vboxusers"
                       "adbusers"
                       "networkmanager"
+                      "cdrom"
                     ];
     };
   };
