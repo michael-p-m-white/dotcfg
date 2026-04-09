@@ -19,7 +19,7 @@
 ** Add Erlang-specific emacs files
 Erlang includes its own emacs mode. Include that from the installed directory.
 #+BEGIN_SRC emacs-lisp
-  (add-load-directory (expand-file-name "~/.nix-profile/lib/erlang/lib/tools-4.1.3/emacs/"))
+  (add-load-directory (expand-file-name "~/.nix-profile/lib/erlang/lib/tools-4.1.4/emacs/"))
 #+END_SRC
 * UI
 ** Colors

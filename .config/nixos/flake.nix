@@ -4,7 +4,7 @@
       type = "github";
       owner = "NixOS";
       repo = "nixpkgs";
-      ref = "nixos-25.11";
+      ref = "3e8a5c15f438c166ee8ae171a9119b9afea859d1";
     };
   };
 
