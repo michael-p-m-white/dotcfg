@@ -2,7 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
   imports =
@@ -161,6 +161,13 @@
     # Legacy options no longer valid
     # daemonNiceLevel = 15;
   };
+
+  # Ensure the "nixpkgs" flake alias refers to the nixpkgs flake used
+  # to build the system.
+  nix.registry.nixpkgs.flake = inputs.nixpkgs;
+  nix.nixPath = [
+    "nixpkgs=${inputs.nixpkgs.outPath}"
+  ];
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
