@@ -210,7 +210,8 @@
       ];
     };
   };
-  programs.adb.enable = true;
+  # Disabled in nixos-26.05 (2026-07-06); should apparently be added to systemPackages now?
+  #programs.adb.enable = true;
 
   # List services that you want to enable:
 

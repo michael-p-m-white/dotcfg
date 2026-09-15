@@ -4,12 +4,12 @@
       type = "github";
       owner = "NixOS";
       repo = "nixpkgs";
-      ref = "3e8a5c15f438c166ee8ae171a9119b9afea859d1";
+      ref = "nixos-26.05";
     };
   };
 
   outputs = { self, nixpkgs }@inputs: {
-
+    inherit nixpkgs;
     nixosConfigurations = {
       nixos = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
